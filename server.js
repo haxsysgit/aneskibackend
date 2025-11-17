@@ -13,6 +13,11 @@ const PORT = process.env.PORT || 3000
 const MONGODB_URI = process.env.MONGODB_URI
 const DB_NAME = process.env.DB_NAME || 'courseworkDB'
 
+// Utility: normalize string for case-insensitive search
+function normalize(str) {
+  return String(str ?? '').trim().toLowerCase()
+}
+
 if (!MONGODB_URI) {
   console.warn('[server] MONGODB_URI is not set. Please configure it in .env')
 }
@@ -77,7 +82,7 @@ app.get('/lessons', async (req, res) => {
 
 // GET /search?q=... -> multi-field search
 app.get('/search', async (req, res) => {
-  const q = (req.query.q || '').toString().trim()
+  const q = normalize(req.query.q)
 
   try {
     let docs
@@ -112,7 +117,8 @@ app.get('/search', async (req, res) => {
       price: doc.price,
       spaces: doc.spaces ?? doc.space,
       description: doc.description,
-      image: doc.image
+      image: doc.image,
+      addedAt: doc._id.getTimestamp()
     }))
 
     res.json(payload)
