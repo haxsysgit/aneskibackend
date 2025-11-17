@@ -12,6 +12,7 @@ const app = express()
 const PORT = process.env.PORT || 3000
 const MONGODB_URI = process.env.MONGODB_URI
 const DB_NAME = process.env.DB_NAME || 'courseworkDB'
+const DEBUG = process.env.DEBUG === 'true' || process.env.NODE_ENV === 'development'
 
 // Utility: normalize string for case-insensitive search
 function normalize(str) {
@@ -35,6 +36,11 @@ function formatLesson(doc) {
     image: doc.image,
     addedAt: doc._id.getTimestamp()
   }
+}
+
+// Utility: debug logging if enabled
+function debugLog(...args) {
+  if (DEBUG) console.log('[debug]', ...args)
 }
 
 if (!MONGODB_URI) {
@@ -98,6 +104,7 @@ app.get('/lessons', async (req, res) => {
 // GET /search?q=... -> multi-field search
 app.get('/search', async (req, res) => {
   const q = normalize(req.query.q)
+  debugLog('Search query:', q)
 
   try {
     let docs
