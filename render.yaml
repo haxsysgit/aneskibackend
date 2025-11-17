@@ -10,5 +10,3 @@ services:
         sync: false
       - key: DB_NAME
         value: courseworkDB
-      - key: PORT
-        value: 3000
