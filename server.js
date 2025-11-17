@@ -76,31 +76,43 @@ app.get('/lessons', async (req, res) => {
 app.get('/search', async (req, res) => {
   const q = (req.query.q || '').toString().trim()
 
-  if (!q) {
-    const all = await lessonsCollection.find({}).toArray()
-    return res.json(all)
-  }
-
   try {
-    const regex = new RegExp(q, 'i')
-    const numberVal = Number(q)
-    const isNumber = !Number.isNaN(numberVal)
+    let docs
 
-    const orConditions = [
-      { subject: regex },
-      { topic: regex },
-      { location: regex },
-      { description: regex }
-    ]
+    if (!q) {
+      docs = await lessonsCollection.find({}).toArray()
+    } else {
+      const regex = new RegExp(q, 'i')
+      const numberVal = Number(q)
+      const isNumber = !Number.isNaN(numberVal)
 
-    if (isNumber) {
-      orConditions.push({ price: numberVal })
-      orConditions.push({ spaces: numberVal })
-      orConditions.push({ space: numberVal })
+      const orConditions = [
+        { subject: regex },
+        { topic: regex },
+        { location: regex },
+        { description: regex }
+      ]
+
+      if (isNumber) {
+        orConditions.push({ price: numberVal })
+        orConditions.push({ spaces: numberVal })
+        orConditions.push({ space: numberVal })
+      }
+
+      docs = await lessonsCollection.find({ $or: orConditions }).toArray()
     }
 
-    const results = await lessonsCollection.find({ $or: orConditions }).toArray()
-    res.json(results)
+    const payload = docs.map((doc) => ({
+      id: doc._id.toString(),
+      subject: doc.subject || doc.topic,
+      location: doc.location,
+      price: doc.price,
+      spaces: doc.spaces ?? doc.space,
+      description: doc.description,
+      image: doc.image
+    }))
+
+    res.json(payload)
   } catch (err) {
     console.error('GET /search failed:', err)
     res.status(500).json({ error: 'Search failed' })
