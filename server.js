@@ -170,6 +170,25 @@ app.post('/orders', async (req, res) => {
   }
 })
 
+// GET /orders -> fetch all orders (for admin/export)
+app.get('/orders', async (req, res) => {
+  try {
+    const docs = await ordersCollection.find({}).toArray()
+    const payload = docs.map((doc) => ({
+      id: doc._id.toString(),
+      name: doc.name,
+      phone: doc.phone,
+      email: doc.email,
+      items: doc.items,
+      createdAt: doc.createdAt
+    }))
+    res.json(payload)
+  } catch (err) {
+    console.error('GET /orders failed:', err)
+    res.status(500).json({ error: 'Failed to fetch orders' })
+  }
+})
+
 // PUT /lessons/:id -> update lesson attributes (e.g. spaces after an order)
 app.put('/lessons/:id', async (req, res) => {
   const { id } = req.params
@@ -224,6 +243,10 @@ app.get('/', (req, res) => {
         description: 'Create a new order/reservation',
         body: { name: 'string', phone: 'string', email: 'string', items: 'Array of {lessonId, spaces}' },
         response: 'Created order object with id'
+      },
+      'GET /orders': {
+        description: 'Fetch all orders (admin/export)',
+        response: 'Array of order objects with id, name, phone, email, items, createdAt'
       },
       'PUT /lessons/:id': {
         description: 'Update a lesson (commonly used to decrement spaces after order)',
