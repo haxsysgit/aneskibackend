@@ -180,17 +180,18 @@ app.put('/lessons/:id', async (req, res) => {
   }
 })
 
-// Root: API documentation and available routes
+// Health check with uptime
 app.get('/', (req, res) => {
   const docs = {
     title: 'After-school lessons API',
     status: 'ok',
     baseUrl: `${req.protocol}://${req.get('host')}`,
+    uptime: process.uptime(),
     endpoints: {
       'GET /': { description: 'This API documentation' },
       'GET /lessons': {
         description: 'Fetch all lessons',
-        response: 'Array of lesson objects with id, subject, location, price, spaces, description, image'
+        response: 'Array of lesson objects with id, subject, location, price, spaces, description, image, addedAt'
       },
       'GET /search': {
         description: 'Search lessons by query',
