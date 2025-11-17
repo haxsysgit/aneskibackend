@@ -23,6 +23,20 @@ function isValidObjectId(id) {
   return ObjectId.isValid(id)
 }
 
+// Utility: format lesson document for API response
+function formatLesson(doc) {
+  return {
+    id: doc._id.toString(),
+    subject: doc.subject || doc.topic,
+    location: doc.location,
+    price: doc.price,
+    spaces: doc.spaces ?? doc.space,
+    description: doc.description,
+    image: doc.image,
+    addedAt: doc._id.getTimestamp()
+  }
+}
+
 if (!MONGODB_URI) {
   console.warn('[server] MONGODB_URI is not set. Please configure it in .env')
 }
@@ -73,18 +87,7 @@ app.get('/images/:fileName', (req, res) => {
 app.get('/lessons', async (req, res) => {
   try {
     const docs = await lessonsCollection.find({}).toArray()
-
-    const payload = docs.map((doc) => ({
-      id: doc._id.toString(),
-      subject: doc.subject || doc.topic,
-      location: doc.location,
-      price: doc.price,
-      spaces: doc.spaces ?? doc.space,
-      description: doc.description,
-      image: doc.image,
-      addedAt: doc._id.getTimestamp() // include creation timestamp
-    }))
-
+    const payload = docs.map(formatLesson)
     res.json(payload)
   } catch (err) {
     console.error('GET /lessons failed:', err)
@@ -122,17 +125,7 @@ app.get('/search', async (req, res) => {
       docs = await lessonsCollection.find({ $or: orConditions }).toArray()
     }
 
-    const payload = docs.map((doc) => ({
-      id: doc._id.toString(),
-      subject: doc.subject || doc.topic,
-      location: doc.location,
-      price: doc.price,
-      spaces: doc.spaces ?? doc.space,
-      description: doc.description,
-      image: doc.image,
-      addedAt: doc._id.getTimestamp()
-    }))
-
+    const payload = docs.map(formatLesson)
     res.json(payload)
   } catch (err) {
     console.error('GET /search failed:', err)
