@@ -17,7 +17,7 @@ const seedLessons = [
     price: 38,
     space: 5,
     description: 'Quadratic, exponential, and polynomial problem solving with guided practice.',
-    image: 'https://www.svgrepo.com/show/311604/math.svg'
+    image: '/images/algebra.svg'
   },
   {
     topic: 'Biology Lab',
@@ -25,7 +25,7 @@ const seedLessons = [
     price: 42,
     space: 5,
     description: 'Microscope work and dissections that bring cellular biology to life.',
-    image: 'https://www.svgrepo.com/show/385149/biology-experiment-lab-laboratory-research-science.svg'
+    image: '/images/biology-lab.svg'
   },
   {
     topic: 'Chemistry Honors',
@@ -33,7 +33,7 @@ const seedLessons = [
     price: 44,
     space: 5,
     description: 'Reactions, stoichiometry, and weekly safety-focused experiments.',
-    image: 'https://www.svgrepo.com/show/82732/chemistry-lab-instruments.svg'
+    image: '/images/chemistry-honors.svg'
   },
   {
     topic: 'Physics Workshop',
@@ -41,7 +41,7 @@ const seedLessons = [
     price: 46,
     space: 5,
     description: 'Motion labs, energy challenges, and simple robotics tie-ins.',
-    image: 'https://www.svgrepo.com/show/197819/physics-science.svg'
+    image: '/images/physics-workshop.svg'
   },
   {
     topic: 'English Literature',
@@ -49,7 +49,7 @@ const seedLessons = [
     price: 36,
     space: 5,
     description: 'Close reading, essay writing, and seminar-style discussions.',
-    image: 'https://www.svgrepo.com/show/230246/books-literature.svg'
+    image: '/images/english-literature.svg'
   },
   {
     topic: 'World History',
@@ -57,7 +57,7 @@ const seedLessons = [
     price: 34,
     space: 5,
     description: 'Global movements and key decisions from ancient to modern eras.',
-    image: 'https://www.svgrepo.com/show/520522/globe.svg'
+    image: '/images/world-history.svg'
   },
   {
     topic: 'Computer Science Principles',
@@ -65,7 +65,7 @@ const seedLessons = [
     price: 48,
     space: 5,
     description: 'Algorithms, interactive apps, and ethical computing foundations.',
-    image: 'https://www.svgrepo.com/show/294200/coding-programming-language.svg'
+    image: '/images/computer-science-principles.svg'
   },
   {
     topic: 'French Conversation',
@@ -73,7 +73,7 @@ const seedLessons = [
     price: 33,
     space: 5,
     description: 'Roleplay, listening drills, and everyday vocabulary.',
-    image: 'https://www.svgrepo.com/show/43090/french.svg'
+    image: '/images/french-conversation.svg'
   },
   {
     topic: 'Studio Art',
@@ -81,7 +81,7 @@ const seedLessons = [
     price: 40,
     space: 5,
     description: 'Charcoal, acrylics, and mixed media portfolio pieces.',
-    image: 'https://www.svgrepo.com/show/205590/paint-palette-art-and-design.svg'
+    image: '/images/studio-art.svg'
   },
   {
     topic: 'Music Ensemble',
@@ -89,7 +89,7 @@ const seedLessons = [
     price: 37,
     space: 5,
     description: 'Contemporary charts and small-group performance skills.',
-    image: 'https://www.svgrepo.com/show/109458/music-notes.svg'
+    image: '/images/music-ensemble.svg'
   },
   {
     topic: 'AP Economics',
@@ -97,7 +97,7 @@ const seedLessons = [
     price: 45,
     space: 5,
     description: 'Market simulations and data-driven policy case studies.',
-    image: 'https://www.svgrepo.com/show/11834/economy.svg'
+    image: '/images/ap-economics.svg'
   },
   {
     topic: 'Health & Wellness',
@@ -105,7 +105,7 @@ const seedLessons = [
     price: 32,
     space: 5,
     description: 'Nutrition, mindfulness, and fitness planning for balanced living.',
-    image: 'https://www.svgrepo.com/show/339260/heart-health.svg'
+    image: '/images/health-wellness.svg'
   },
   {
     topic: 'Environmental Science',
@@ -113,7 +113,7 @@ const seedLessons = [
     price: 41,
     space: 5,
     description: 'Ecosystems, sustainability challenges, and field data collection.',
-    image: 'https://www.svgrepo.com/show/456300/leaf-globe.svg'
+    image: '/images/environmental-science.svg'
   }
 ]
 
